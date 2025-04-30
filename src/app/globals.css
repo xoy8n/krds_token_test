@@ -1,26 +1,686 @@
 @import "tailwindcss";
+@import "tw-animate-css";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@custom-variant dark (&:is(.dark *));
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+:root {
+  /* Primitive Colors - Light */
+  --color-primitive-light-gray-100: #000000;
+  --color-primitive-light-gray-95: #131416;
+  --color-primitive-light-gray-90: #1E2124;
+  --color-primitive-light-gray-80: #33363D;
+  --color-primitive-light-gray-70: #464C53;
+  --color-primitive-light-gray-60: #58616A;
+  --color-primitive-light-gray-50: #6D7882;
+  --color-primitive-light-gray-40: #8A949E;
+  --color-primitive-light-gray-30: #B1B8BE;
+  --color-primitive-light-gray-20: #CDD1D5;
+  --color-primitive-light-gray-10: #E6E8EA;
+  --color-primitive-light-gray-5: #F4F5F6;
+  --color-primitive-light-gray-0: #FFFFFF;
+  --color-primitive-light-primary-95: #020F27;
+  --color-primitive-light-primary-90: #03163A;
+  --color-primitive-light-secondary-95: #02162C;
+  --color-primitive-light-secondary-90: #031F3F;
+  --color-primitive-light-secondary-80: #052B57;
+  --color-primitive-light-secondary-70: #063A74;
+  --color-primitive-light-secondary-60: #1C589C;
+  --color-primitive-light-secondary-50: #346FB2;
+  --color-primitive-light-point-95: #21080A;
+  --color-primitive-light-secondary-40: #6B96C7;
+  --color-primitive-light-secondary-30: #90B0D5;
+  --color-primitive-light-secondary-20: #BACBDE;
+  --color-primitive-light-secondary-10: #D6E0EB;
+  --color-primitive-light-secondary-5: #EEF2F7;
+  --color-primitive-light-point-90: #310C0F;
+  --color-primitive-light-point-80: #521419;
+  --color-primitive-light-point-70: #7A1F26;
+  --color-primitive-light-point-60: #AB2B36;
+  --color-primitive-light-point-50: #D63D4A;
+  --color-primitive-light-point-40: #D65C66;
+  --color-primitive-light-point-30: #E0858C;
+  --color-primitive-light-point-20: #EBADB2;
+  --color-primitive-light-point-10: #F5D6D9;
+  --color-primitive-light-point-5: #FBEFF0;
+  --color-primitive-light-primary-80: #052561;
+  --color-primitive-light-primary-70: #083891;
+  --color-primitive-light-primary-60: #0B50D0;
+  --color-primitive-light-primary-50: #256EF4;
+  --color-primitive-light-primary-40: #4C87F6;
+  --color-primitive-light-primary-30: #86AFF9;
+  --color-primitive-light-primary-20: #B1CEFB;
+  --color-primitive-light-primary-10: #D8E5FD;
+  --color-primitive-light-primary-5: #ECF2FE;
+  --color-primitive-light-danger-95: #260903;
+  --color-primitive-light-danger-90: #390D05;
+  --color-primitive-light-danger-80: #5C180A;
+  --color-primitive-light-danger-70: #8A240F;
+  --color-primitive-light-danger-60: #BD2C0F;
+  --color-primitive-light-danger-50: #DE3412;
+  --color-primitive-light-danger-40: #F05F42;
+  --color-primitive-light-danger-30: #F48771;
+  --color-primitive-light-danger-20: #F7AFA1;
+  --color-primitive-light-danger-10: #FCDFD9;
+  --color-primitive-light-danger-5: #FDEFEC;
+  --color-primitive-light-warning-95: #241800;
+  --color-primitive-light-warning-90: #2E1F00;
+  --color-primitive-light-warning-80: #422C00;
+  --color-primitive-light-warning-70: #614100;
+  --color-primitive-light-warning-60: #8A5C00;
+  --color-primitive-light-warning-50: #9E6A00;
+  --color-primitive-light-warning-40: #C78500;
+  --color-primitive-light-warning-30: #FFB114;
+  --color-primitive-light-warning-20: #FFC95C;
+  --color-primitive-light-warning-10: #FFE0A3;
+  --color-primitive-light-warning-5: #FFF3DB;
+  --color-primitive-light-success-95: #0E2012;
+  --color-primitive-light-success-90: #122B18;
+  --color-primitive-light-information-95: #021A2C;
+  --color-primitive-light-alpha-black100: #000000;
+  --color-primitive-light-graphic-90: #223A58;
+  --color-primitive-light-graphic-70: #39506C;
+  --color-primitive-light-graphic-50: #61758F;
+  --color-primitive-light-graphic-30: #98ACC5;
+  --color-primitive-light-graphic-10: #E5ECF9;
+  --color-primitive-light-alpha-black75: #000000BF;
+  --color-primitive-light-alpha-black50: #00000080;
+  --color-primitive-light-alpha-black25: #00000040;
+  --color-primitive-light-alpha-black10: #0000001A;
+  --color-primitive-light-alpha-black0: #00000000;
+  --color-primitive-light-alpha-white100: #FFFFFF;
+  --color-primitive-light-alpha-white75: #FFFFFFBF;
+  --color-primitive-light-alpha-white50: #FFFFFF80;
+  --color-primitive-light-alpha-white25: #FFFFFF40;
+  --color-primitive-light-alpha-white10: #FFFFFF1A;
+  --color-primitive-light-alpha-white0: #FFFFFF00;
+  --color-primitive-light-information-90: #03253F;
+  --color-primitive-light-information-80: #053961;
+  --color-primitive-light-information-70: #085691;
+  --color-primitive-light-information-60: #096AB3;
+  --color-primitive-light-information-50: #0B78CB;
+  --color-primitive-light-information-40: #2098F3;
+  --color-primitive-light-information-30: #5FB5F7;
+  --color-primitive-light-information-20: #9ED2FA;
+  --color-primitive-light-information-10: #D3EBFD;
+  --color-primitive-light-information-5: #E7F4FE;
+  --color-primitive-light-success-80: #1F4727;
+  --color-primitive-light-success-70: #285D33;
+  --color-primitive-light-success-60: #267337;
+  --color-primitive-light-success-50: #228738;
+  --color-primitive-light-success-40: #3FA654;
+  --color-primitive-light-success-30: #7EC88E;
+  --color-primitive-light-success-20: #A9DAB4;
+  --color-primitive-light-success-10: #D8EEDD;
+  --color-primitive-light-success-5: #EAF6EC;
+
+  /* Primitive Colors - High Contrast */
+  --color-primitive-high-contrast-gray-100: #000000;
+  --color-primitive-high-contrast-gray-95: #131416;
+  --color-primitive-high-contrast-gray-90: #1E2124;
+  --color-primitive-high-contrast-gray-80: #33363D;
+  --color-primitive-high-contrast-gray-70: #464C53;
+  --color-primitive-high-contrast-gray-60: #58616A;
+  --color-primitive-high-contrast-gray-50: #6D7882;
+  --color-primitive-high-contrast-gray-40: #8A949E;
+  --color-primitive-high-contrast-gray-30: #B1B8BE;
+  --color-primitive-high-contrast-gray-20: #CDD1D5;
+  --color-primitive-high-contrast-gray-10: #E6E8EA;
+  --color-primitive-high-contrast-gray-5: #F4F5F6;
+  --color-primitive-high-contrast-gray-0: #FFFFFF;
+  --color-primitive-high-contrast-primary-95: #020F27;
+  --color-primitive-high-contrast-primary-90: #03163A;
+  --color-primitive-high-contrast-secondary-95: #091F25;
+  --color-primitive-high-contrast-secondary-90: #0E3139;
+  --color-primitive-high-contrast-secondary-80: #113B45;
+  --color-primitive-high-contrast-secondary-70: #17505E;
+  --color-primitive-high-contrast-secondary-60: #1F687A;
+  --color-primitive-high-contrast-secondary-50: #268097;
+  --color-primitive-high-contrast-point-95: #21080A;
+  --color-primitive-high-contrast-secondary-40: #3D9FB8;
+  --color-primitive-high-contrast-secondary-30: #75C0D1;
+  --color-primitive-high-contrast-secondary-20: #ABD8E3;
+  --color-primitive-high-contrast-secondary-10: #D5EBF1;
+  --color-primitive-high-contrast-secondary-5: #EDF6F8;
+  --color-primitive-high-contrast-point-90: #310C0F;
+  --color-primitive-high-contrast-point-80: #521419;
+  --color-primitive-high-contrast-point-70: #7A1F26;
+  --color-primitive-high-contrast-point-60: #AB2B36;
+  --color-primitive-high-contrast-point-50: #D63D4A;
+  --color-primitive-high-contrast-point-40: #D65C66;
+  --color-primitive-high-contrast-point-30: #E0858C;
+  --color-primitive-high-contrast-point-20: #EBADB2;
+  --color-primitive-high-contrast-point-10: #F5D6D9;
+  --color-primitive-high-contrast-point-5: #FBEFF0;
+  --color-primitive-high-contrast-primary-80: #052561;
+  --color-primitive-high-contrast-primary-70: #083891;
+  --color-primitive-high-contrast-primary-60: #0B50D0;
+  --color-primitive-high-contrast-primary-50: #256EF4;
+  --color-primitive-high-contrast-primary-40: #4C87F6;
+  --color-primitive-high-contrast-primary-30: #86AFF9;
+  --color-primitive-high-contrast-primary-20: #B1CEFB;
+  --color-primitive-high-contrast-primary-10: #D8E5FD;
+  --color-primitive-high-contrast-primary-5: #ECF2FE;
+  --color-primitive-high-contrast-danger-95: #260903;
+  --color-primitive-high-contrast-danger-90: #390D05;
+  --color-primitive-high-contrast-danger-80: #5C180A;
+  --color-primitive-high-contrast-danger-70: #8A240F;
+  --color-primitive-high-contrast-danger-60: #BD2C0F;
+  --color-primitive-high-contrast-danger-50: #DE3412;
+  --color-primitive-high-contrast-danger-40: #F05F42;
+  --color-primitive-high-contrast-danger-30: #F48771;
+  --color-primitive-high-contrast-danger-20: #F7AFA1;
+  --color-primitive-high-contrast-danger-10: #FCDFD9;
+  --color-primitive-high-contrast-danger-5: #FDEFEC;
+  --color-primitive-high-contrast-warning-95: #241800;
+  --color-primitive-high-contrast-warning-90: #2E1F00;
+  --color-primitive-high-contrast-warning-80: #422C00;
+  --color-primitive-high-contrast-warning-70: #614100;
+  --color-primitive-high-contrast-warning-60: #8A5C00;
+  --color-primitive-high-contrast-warning-50: #9E6A00;
+  --color-primitive-high-contrast-warning-40: #C78500;
+  --color-primitive-high-contrast-warning-30: #FFB114;
+  --color-primitive-high-contrast-warning-20: #FFC95C;
+  --color-primitive-high-contrast-warning-10: #FFE0A3;
+  --color-primitive-high-contrast-warning-5: #FFF3DB;
+  --color-primitive-high-contrast-success-95: #0E2012;
+  --color-primitive-high-contrast-success-90: #122B18;
+  --color-primitive-high-contrast-information-95: #021A2C;
+  --color-primitive-high-contrast-alpha-black100: #000000;
+  --color-primitive-high-contrast-graphic-90: #223A58;
+  --color-primitive-high-contrast-graphic-70: #39506C;
+  --color-primitive-high-contrast-graphic-50: #61758F;
+  --color-primitive-high-contrast-graphic-30: #98ACC5;
+  --color-primitive-high-contrast-graphic-10: #E5ECF9;
+  --color-primitive-high-contrast-alpha-black75: #000000BF;
+  --color-primitive-high-contrast-alpha-black50: #00000080;
+  --color-primitive-high-contrast-alpha-black25: #00000040;
+  --color-primitive-high-contrast-alpha-black10: #0000001A;
+  --color-primitive-high-contrast-alpha-black0: #00000000;
+  --color-primitive-high-contrast-alpha-white100: #FFFFFF;
+  --color-primitive-high-contrast-alpha-white75: #FFFFFFBF;
+  --color-primitive-high-contrast-alpha-white50: #FFFFFF80;
+  --color-primitive-high-contrast-alpha-white25: #FFFFFF40;
+  --color-primitive-high-contrast-alpha-white10: #FFFFFF1A;
+  --color-primitive-high-contrast-alpha-white0: #FFFFFF00;
+  --color-primitive-high-contrast-information-90: #03253F;
+  --color-primitive-high-contrast-information-80: #053961;
+  --color-primitive-high-contrast-information-70: #085691;
+  --color-primitive-high-contrast-information-60: #096AB3;
+  --color-primitive-high-contrast-information-50: #0B78CB;
+  --color-primitive-high-contrast-information-40: #2098F3;
+  --color-primitive-high-contrast-information-30: #5FB5F7;
+  --color-primitive-high-contrast-information-20: #9ED2FA;
+  --color-primitive-high-contrast-information-10: #D3EBFD;
+  --color-primitive-high-contrast-information-5: #E7F4FE;
+  --color-primitive-high-contrast-success-80: #1F4727;
+  --color-primitive-high-contrast-success-70: #285D33;
+  --color-primitive-high-contrast-success-60: #267337;
+  --color-primitive-high-contrast-success-50: #228738;
+  --color-primitive-high-contrast-success-40: #3FA654;
+  --color-primitive-high-contrast-success-30: #7EC88E;
+  --color-primitive-high-contrast-success-20: #A9DAB4;
+  --color-primitive-high-contrast-success-10: #D8EEDD;
+  --color-primitive-high-contrast-success-5: #EAF6EC;
+
+  /* Primitive Numbers */
+  --number-0: 0;
+  --number-1: 1px;
+  --number-2: 2px;
+  --number-3: 4px;
+  --number-4: 6px;
+  --number-5: 8px;
+  --number-6: 10px;
+  --number-7: 12px;
+  --number-8: 16px;
+  --number-9: 20px;
+  --number-10: 24px;
+  --number-11: 28px;
+  --number-12: 32px;
+  --number-13: 36px;
+  --number-14: 40px;
+  --number-15: 44px;
+  --number-16: 48px;
+  --number-17: 56px;
+  --number-18: 64px;
+  --number-19: 72px;
+  --number-20: 80px;
+  --number-21: 96px;
+  --number-max: 1000px;
+
+  /* Primitive Typography */
+  --typo-font-type: "Pretendard GOV";
+  --typo-letter-spacing-0: 0;
+  --typo-letter-spacing-1: 1px;
+  --typo-font-weight-regular: 400; /* Assuming Regular maps to 400 */
+  --typo-font-weight-bold: 700; /* Assuming Bold maps to 700 */
+
+  /* Responsive - PC */
+  --font-size-pc-display-large: 60px;
+  --font-size-pc-display-medium: 44px;
+  --font-size-pc-display-small: 36px;
+  --font-size-pc-heading-xlarge: 40px;
+  --font-size-pc-heading-large: 32px;
+  --font-size-pc-heading-medium: 24px;
+  --font-size-pc-heading-small: 19px;
+  --font-size-pc-body-large: 19px;
+  --font-size-pc-body-medium: 17px;
+  --font-size-pc-body-small: 15px;
+  --font-size-pc-body-xsmall: 13px;
+  --font-size-pc-heading-xsmall: 17px;
+  --font-size-pc-heading-xxsmall: 15px;
+  --font-size-pc-label-large: 19px;
+  --font-size-pc-label-medium: 17px;
+  --font-size-pc-label-small: 15px;
+  --font-size-pc-label-xsmall: 13px;
+  --font-size-pc-navigation-title-medium: 24px;
+  --font-size-pc-navigation-title-small: 19px;
+  --font-size-pc-navigation-depth-medium-bold: 17px;
+  --font-size-pc-navigation-depth-medium: 17px;
+  --font-size-pc-navigation-depth-small: 15px;
+  --font-size-pc-navigation-depth-small-bold: 15px;
+  --gap-layout-pc-header-breadcrumb: var(--number-10);
+  --padding-card-pc-large: var(--number-14);
+  --padding-card-pc-medium: var(--number-12);
+  --padding-card-pc-small: var(--number-10);
+  --padding-card-pc-xsmall: var(--number-8);
+  --gap-layout-pc-left-contents: var(--number-18);
+  --gap-layout-pc-contents-right: var(--number-14);
+  --gap-layout-pc-contents-footer: var(--number-18);
+  --gap-layout-pc-breadcrumb-h1: var(--number-14);
+  --gap-layout-pc-h1-h2: var(--number-16);
+  --gap-layout-pc-h2-h2: var(--number-20);
+  --gap-layout-pc-h2-h3: var(--number-14);
+  --gap-layout-pc-h3-h3: var(--number-18);
+  --gap-layout-pc-h3-h4: var(--number-10);
+  --gap-layout-pc-h4-h4: var(--number-14);
+  --gap-layout-pc-h4-h5: var(--number-8);
+  --gap-layout-pc-h5-h5: var(--number-12);
+  --gap-layout-pc-title-body-large: var(--number-10);
+  --gap-layout-pc-title-body-medium: var(--number-9);
+  --gap-layout-pc-title-body-small: var(--number-8);
+  --gap-layout-pc-text-text-large: var(--number-9);
+  --gap-layout-pc-text-text-medium: var(--number-8);
+  --gap-layout-pc-text-text-small: var(--number-7);
+  --gap-layout-pc-image-text-large: var(--number-12);
+  --gap-layout-pc-image-text-medium: var(--number-10);
+  --gap-layout-pc-image-text-small: var(--number-9);
+
+  /* Responsive - Mobile */
+  --font-size-mobile-display-large: 44px;
+  --font-size-mobile-display-medium: 32px;
+  --font-size-mobile-display-small: 28px;
+  --font-size-mobile-heading-xlarge: 28px;
+  --font-size-mobile-heading-large: 24px;
+  --font-size-mobile-heading-medium: 22px;
+  --font-size-mobile-heading-small: 19px;
+  --font-size-mobile-body-large: 19px;
+  --font-size-mobile-body-medium: 17px;
+  --font-size-mobile-body-small: 15px;
+  --font-size-mobile-body-xsmall: 13px;
+  --font-size-mobile-heading-xsmall: 17px;
+  --font-size-mobile-heading-xxsmall: 15px;
+  --font-size-mobile-label-large: 19px;
+  --font-size-mobile-label-medium: 17px;
+  --font-size-mobile-label-small: 15px;
+  --font-size-mobile-label-xsmall: 13px;
+  --font-size-mobile-navigation-title-medium: 22px;
+  --font-size-mobile-navigation-title-small: 19px;
+  --font-size-mobile-navigation-depth-medium-bold: 17px;
+  --font-size-mobile-navigation-depth-medium: 17px;
+  --font-size-mobile-navigation-depth-small: 15px;
+  --font-size-mobile-navigation-depth-small-bold: 15px;
+  --gap-layout-mobile-header-breadcrumb: var(--number-8);
+  --padding-card-mobile-large: var(--number-10);
+  --padding-card-mobile-medium: var(--number-10);
+  --padding-card-mobile-small: var(--number-9);
+  --padding-card-mobile-xsmall: var(--number-7);
+  --gap-layout-mobile-left-contents: 0px;
+  --gap-layout-mobile-contents-right: 0px;
+  --gap-layout-mobile-contents-footer: var(--number-14);
+  --gap-layout-mobile-breadcrumb-h1: var(--number-12);
+  --gap-layout-mobile-h1-h2: var(--number-12);
+  --gap-layout-mobile-h2-h2: var(--number-14);
+  --gap-layout-mobile-h2-h3: var(--number-10);
+  --gap-layout-mobile-h3-h3: var(--number-12);
+  --gap-layout-mobile-h3-h4: var(--number-8);
+  --gap-layout-mobile-h4-h4: var(--number-10);
+  --gap-layout-mobile-h4-h5: var(--number-7);
+  --gap-layout-mobile-h5-h5: var(--number-8);
+  --gap-layout-mobile-title-body-large: var(--number-9);
+  --gap-layout-mobile-title-body-medium: var(--number-7);
+  --gap-layout-mobile-title-body-small: var(--number-5);
+  --gap-layout-mobile-text-text-large: var(--number-8);
+  --gap-layout-mobile-text-text-medium: var(--number-7);
+  --gap-layout-mobile-text-text-small: var(--number-6);
+  --gap-layout-mobile-image-text-large: var(--number-10);
+  --gap-layout-mobile-image-text-medium: var(--number-9);
+  --gap-layout-mobile-image-text-small: var(--number-8);
+
+  /* Semantic */
+  --gap-1: var(--number-2);
+  --gap-2: var(--number-3);
+  --gap-3: var(--number-5);
+  --gap-4: var(--number-7);
+  --gap-5: var(--number-8);
+  --gap-6: var(--number-9);
+  --gap-7: var(--number-10);
+  --gap-8: var(--number-12);
+  --gap-9: var(--number-14);
+  --gap-10: var(--number-16);
+  --gap-11: var(--number-18);
+  --gap-12: var(--number-20);
+  --padding-1: var(--number-2);
+  --padding-2: var(--number-3);
+  --padding-3: var(--number-5);
+  --padding-4: var(--number-6);
+  --padding-5: var(--number-7);
+  --padding-6: var(--number-8);
+  --padding-7: var(--number-9);
+  --padding-8: var(--number-10);
+  --padding-9: var(--number-12);
+  --padding-10: var(--number-14);
+  --size-height-1: var(--number-5);
+  --radius-xsmall1: var(--number-2);
+  --size-height-2: var(--number-8);
+  --radius-xsmall2: var(--number-2);
+  --radius-xsmall3: var(--number-2);
+  --size-height-3: var(--number-9);
+  --radius-small1: var(--number-3);
+  --size-height-4: var(--number-10);
+  --size-height-5: var(--number-12);
+  --radius-small2: var(--number-3);
+  --radius-small3: var(--number-3);
+  --size-height-6: var(--number-14);
+  --size-height-7: var(--number-16);
+  --radius-medium1: var(--number-4);
+  --size-height-8: var(--number-17);
+  --radius-medium2: var(--number-4);
+  --size-height-9: var(--number-18);
+  --size-height-10: var(--number-19);
+  --radius-medium3: var(--number-5);
+  --size-height-11: var(--number-20);
+  --radius-medium4: var(--number-5);
+  --radius-large1: var(--number-6);
+  --radius-large2: var(--number-6);
+  --radius-xlarge1: var(--number-7);
+  --radius-xlarge2: var(--number-7);
+  --radius-max: var(--number-max);
+
+  /* Typography Styles */
+  --typography-display-large-fontSize: 60px;
+  --typography-display-large-fontFamily: "Pretendard GOV";
+  --typography-display-large-fontWeight: 700;
+  --typography-display-large-lineHeight: 150%;
+  --typography-display-large-letterSpacing: 1px;
+  --typography-display-medium-fontSize: 44px;
+  --typography-display-medium-fontFamily: "Pretendard GOV";
+  --typography-display-medium-fontWeight: 700;
+  --typography-display-medium-lineHeight: 150%;
+  --typography-display-medium-letterSpacing: 1px;
+  --typography-display-small-fontSize: 36px;
+  --typography-display-small-fontFamily: "Pretendard GOV";
+  --typography-display-small-fontWeight: 700;
+  --typography-display-small-lineHeight: 150%;
+  --typography-display-small-letterSpacing: 1px;
+  --typography-heading-xlarge-fontSize: 40px;
+  --typography-heading-xlarge-fontFamily: "Pretendard GOV";
+  --typography-heading-xlarge-fontWeight: 700;
+  --typography-heading-xlarge-lineHeight: 150%;
+  --typography-heading-xlarge-letterSpacing: 1px;
+  --typography-heading-large-fontSize: 32px;
+  --typography-heading-large-fontFamily: "Pretendard GOV";
+  --typography-heading-large-fontWeight: 700;
+  --typography-heading-large-lineHeight: 150%;
+  --typography-heading-large-letterSpacing: 1px;
+  --typography-heading-medium-fontSize: 24px;
+  --typography-heading-medium-fontFamily: "Pretendard GOV";
+  --typography-heading-medium-fontWeight: 700;
+  --typography-heading-medium-lineHeight: 150%;
+  --typography-heading-medium-letterSpacing: 0px;
+  --typography-heading-small-fontSize: 19px;
+  --typography-heading-small-fontFamily: "Pretendard GOV";
+  --typography-heading-small-fontWeight: 700;
+  --typography-heading-small-lineHeight: 150%;
+  --typography-heading-small-letterSpacing: 0px;
+  --typography-heading-xsmall-fontSize: 17px;
+  --typography-heading-xsmall-fontFamily: "Pretendard GOV";
+  --typography-heading-xsmall-fontWeight: 700;
+  --typography-heading-xsmall-lineHeight: 150%;
+  --typography-heading-xsmall-letterSpacing: 0px;
+  --typography-heading-xxsmall-fontSize: 15px;
+  --typography-heading-xxsmall-fontFamily: "Pretendard GOV";
+  --typography-heading-xxsmall-fontWeight: 700;
+  --typography-heading-xxsmall-lineHeight: 150%;
+  --typography-heading-xxsmall-letterSpacing: 0px;
+  --typography-body-large-fontSize: 19px;
+  --typography-body-large-fontFamily: "Pretendard GOV";
+  --typography-body-large-fontWeight: 400;
+  --typography-body-large-lineHeight: 150%;
+  --typography-body-large-letterSpacing: 0px;
+  --typography-body-medium-fontSize: 17px;
+  --typography-body-medium-fontFamily: "Pretendard GOV";
+  --typography-body-medium-fontWeight: 400;
+  --typography-body-medium-lineHeight: 150%;
+  --typography-body-medium-letterSpacing: 0px;
+  --typography-body-small-fontSize: 15px;
+  --typography-body-small-fontFamily: "Pretendard GOV";
+  --typography-body-small-fontWeight: 400;
+  --typography-body-small-lineHeight: 150%;
+  --typography-body-small-letterSpacing: 0px;
+  --typography-body-xsmall-fontSize: 13px;
+  --typography-body-xsmall-fontFamily: "Pretendard GOV";
+  --typography-body-xsmall-fontWeight: 400;
+  --typography-body-xsmall-lineHeight: 150%;
+  --typography-body-xsmall-letterSpacing: 0px;
+  --typography-body-large-bold-fontSize: 19px;
+  --typography-body-large-bold-fontFamily: "Pretendard GOV";
+  --typography-body-large-bold-fontWeight: 700;
+  --typography-body-large-bold-lineHeight: 150%;
+  --typography-body-large-bold-letterSpacing: 0px;
+  --typography-body-medium-bold-fontSize: 17px;
+  --typography-body-medium-bold-fontFamily: "Pretendard GOV";
+  --typography-body-medium-bold-fontWeight: 700;
+  --typography-body-medium-bold-lineHeight: 150%;
+  --typography-body-medium-bold-letterSpacing: 0px;
+  --typography-body-small-bold-fontSize: 15px;
+  --typography-body-small-bold-fontFamily: "Pretendard GOV";
+  --typography-body-small-bold-fontWeight: 700;
+  --typography-body-small-bold-lineHeight: 150%;
+  --typography-body-small-bold-letterSpacing: 0px;
+  --typography-body-xsmall-bold-fontSize: 13px;
+  --typography-body-xsmall-bold-fontFamily: "Pretendard GOV";
+  --typography-body-xsmall-bold-fontWeight: 700;
+  --typography-body-xsmall-bold-lineHeight: 150%;
+  --typography-body-xsmall-bold-letterSpacing: 0px;
+  --typography-label-large-fontSize: 19px;
+  --typography-label-large-fontFamily: "Pretendard GOV";
+  --typography-label-large-fontWeight: 400;
+  --typography-label-large-lineHeight: 150%;
+  --typography-label-large-letterSpacing: 0px;
+  --typography-label-medium-fontSize: 17px;
+  --typography-label-medium-fontFamily: "Pretendard GOV";
+  --typography-label-medium-fontWeight: 400;
+  --typography-label-medium-lineHeight: 150%;
+  --typography-label-medium-letterSpacing: 0px;
+  --typography-label-small-fontSize: 15px;
+  --typography-label-small-fontFamily: "Pretendard GOV";
+  --typography-label-small-fontWeight: 400;
+  --typography-label-small-lineHeight: 150%;
+  --typography-label-small-letterSpacing: 0px;
+  --typography-label-xsmall-fontSize: 13px;
+  --typography-label-xsmall-fontFamily: "Pretendard GOV";
+  --typography-label-xsmall-fontWeight: 400;
+  --typography-label-xsmall-lineHeight: 150%;
+  --typography-label-xsmall-letterSpacing: 0px;
+  --typography-navigation-title-medium-fontSize: 24px;
+  --typography-navigation-title-medium-fontFamily: "Pretendard GOV";
+  --typography-navigation-title-medium-fontWeight: 700;
+  --typography-navigation-title-medium-lineHeight: 150%;
+  --typography-navigation-title-medium-letterSpacing: 0px;
+  --typography-navigation-title-small-fontSize: 19px;
+  --typography-navigation-title-small-fontFamily: "Pretendard GOV";
+  --typography-navigation-title-small-fontWeight: 700;
+  --typography-navigation-title-small-lineHeight: 150%;
+  --typography-navigation-title-small-letterSpacing: 0px;
+  --typography-navigation-depth-medium-bold-fontSize: 17px;
+  --typography-navigation-depth-medium-bold-fontFamily: "Pretendard GOV";
+  --typography-navigation-depth-medium-bold-fontWeight: 700;
+  --typography-navigation-depth-medium-bold-lineHeight: 150%;
+  --typography-navigation-depth-medium-bold-letterSpacing: 0px;
+  --typography-navigation-depth-medium-fontSize: 17px;
+  --typography-navigation-depth-medium-fontFamily: "Pretendard GOV";
+  --typography-navigation-depth-medium-fontWeight: 400;
+  --typography-navigation-depth-medium-lineHeight: 150%;
+  --typography-navigation-depth-medium-letterSpacing: 0px;
+  --typography-navigation-depth-small-bold-fontSize: 15px;
+  --typography-navigation-depth-small-bold-fontFamily: "Pretendard GOV";
+  --typography-navigation-depth-small-bold-fontWeight: 700;
+  --typography-navigation-depth-small-lineHeight: 150%;
+  --typography-navigation-depth-small-letterSpacing: 0px;
+  --typography-navigation-depth-small-fontSize: 15px;
+  --typography-navigation-depth-small-fontFamily: "Pretendard GOV";
+  --typography-navigation-depth-small-fontWeight: 400;
+  --typography-navigation-depth-small-lineHeight: 150%;
+  --typography-navigation-depth-small-letterSpacing: 0px;
+  --typography-underline-large-fontSize: 19px;
+  --typography-underline-large-fontFamily: "Pretendard GOV";
+  --typography-underline-large-fontWeight: 400;
+  --typography-underline-large-lineHeight: 150%;
+  --typography-underline-large-letterSpacing: 0%;
+  --typography-underline-large-textDecoration: underline;
+  --typography-underline-medium-fontSize: 17px;
+  --typography-underline-medium-fontFamily: "Pretendard GOV";
+  --typography-underline-medium-fontWeight: 400;
+  --typography-underline-medium-lineHeight: 150%;
+  --typography-underline-medium-letterSpacing: 0%;
+  --typography-underline-medium-textDecoration: underline;
+  --typography-underline-small-fontSize: 15px;
+  --typography-underline-small-fontFamily: "Pretendard GOV";
+  --typography-underline-small-fontWeight: 400;
+  --typography-underline-small-lineHeight: 150%;
+  --typography-underline-small-letterSpacing: 0%;
+  --typography-underline-small-textDecoration: underline;
+  --typography-underline-xsmall-fontSize: 13px;
+  --typography-underline-xsmall-fontFamily: "Pretendard GOV";
+  --typography-underline-xsmall-fontWeight: 400;
+  --typography-underline-xsmall-lineHeight: 150%;
+  --typography-underline-xsmall-letterSpacing: 0%;
+  --typography-underline-xsmall-textDecoration: underline;
+
+
+  --radius: var(--radius-lg); /* Using semantic radius variable */
+  --background: var(--color-primitive-light-gray-0); /* Using Figma variable */
+  --foreground: var(--color-primitive-light-gray-100); /* Using Figma variable */
+  --card: var(--color-primitive-light-gray-0); /* Using Figma variable */
+  --card-foreground: var(--color-primitive-light-gray-100); /* Using Figma variable */
+  --popover: var(--color-primitive-light-gray-0); /* Using Figma variable */
+  --popover-foreground: var(--color-primitive-light-gray-100); /* Using Figma variable */
+  --primary: var(--color-primitive-light-primary-50); /* Using Figma variable */
+  --primary-foreground: var(--color-primitive-light-gray-0); /* Using Figma variable */
+  --secondary: var(--color-primitive-light-secondary-10); /* Using Figma variable */
+  --secondary-foreground: var(--color-primitive-light-secondary-90); /* Using Figma variable */
+  --muted: var(--color-primitive-light-gray-10); /* Using Figma variable */
+  --muted-foreground: var(--color-primitive-light-gray-60); /* Using Figma variable */
+  --accent: var(--color-primitive-light-gray-10); /* Using Figma variable */
+  --accent-foreground: var(--color-primitive-light-gray-90); /* Using Figma variable */
+  --destructive: var(--color-primitive-light-danger-50); /* Using Figma variable */
+  --border: var(--color-primitive-light-gray-20); /* Using Figma variable */
+  --input: var(--color-primitive-light-gray-20); /* Using Figma variable */
+  --ring: var(--color-primitive-light-primary-50); /* Using Figma variable */
+  --chart-1: var(--color-primitive-light-primary-50); /* Using Figma variable - Example mapping, adjust as needed */
+  --chart-2: var(--color-primitive-light-secondary-50); /* Using Figma variable - Example mapping, adjust as needed */
+  --chart-3: var(--color-primitive-light-point-50); /* Using Figma variable - Example mapping, adjust as needed */
+  --chart-4: var(--color-primitive-light-success-50); /* Using Figma variable - Example mapping, adjust as needed */
+  --chart-5: var(--color-primitive-light-information-50); /* Using Figma variable - Example mapping, adjust as needed */
+  --sidebar: var(--color-primitive-light-gray-5); /* Using Figma variable */
+  --sidebar-foreground: var(--color-primitive-light-gray-100); /* Using Figma variable */
+  --sidebar-primary: var(--color-primitive-light-primary-50); /* Using Figma variable */
+  --sidebar-primary-foreground: var(--color-primitive-light-gray-0); /* Using Figma variable */
+  --sidebar-accent: var(--color-primitive-light-gray-10); /* Using Figma variable */
+  --sidebar-accent-foreground: var(--color-primitive-light-gray-90); /* Using Figma variable */
+  --sidebar-border: var(--color-primitive-light-gray-20); /* Using Figma variable */
+  --sidebar-ring: var(--color-primitive-light-primary-50); /* Using Figma variable */
+}
+
+.dark {
+  --background: var(--color-primitive-high-contrast-gray-100); /* Using Figma variable */
+  --foreground: var(--color-primitive-high-contrast-gray-0); /* Using Figma variable */
+  --card: var(--color-primitive-high-contrast-gray-90); /* Using Figma variable */
+  --card-foreground: var(--color-primitive-high-contrast-gray-0); /* Using Figma variable */
+  --popover: var(--color-primitive-high-contrast-gray-90); /* Using Figma variable */
+  --popover-foreground: var(--color-primitive-high-contrast-gray-0); /* Using Figma variable */
+  --primary: var(--color-primitive-high-contrast-primary-50); /* Using Figma variable */
+  --primary-foreground: var(--color-primitive-high-contrast-gray-0); /* Using Figma variable */
+  --secondary: var(--color-primitive-high-contrast-secondary-90); /* Using Figma variable */
+  --secondary-foreground: var(--color-primitive-high-contrast-gray-0); /* Using Figma variable */
+  --muted: var(--color-primitive-high-contrast-gray-90); /* Using Figma variable */
+  --muted-foreground: var(--color-primitive-high-contrast-gray-40); /* Using Figma variable */
+  --accent: var(--color-primitive-high-contrast-gray-90); /* Using Figma variable */
+  --accent-foreground: var(--color-primitive-high-contrast-gray-0); /* Using Figma variable */
+  --destructive: var(--color-primitive-high-contrast-danger-50); /* Using Figma variable */
+  --border: var(--color-primitive-high-contrast-gray-80); /* Using Figma variable */
+  --input: var(--color-primitive-high-contrast-gray-80); /* Using Figma variable */
+  --ring: var(--color-primitive-high-contrast-primary-50); /* Using Figma variable */
+  --chart-1: var(--color-primitive-high-contrast-primary-50); /* Using Figma variable - Example mapping, adjust as needed */
+  --chart-2: var(--color-primitive-high-contrast-secondary-50); /* Using Figma variable - Example mapping, adjust as needed */
+  --chart-3: var(--color-primitive-high-contrast-point-50); /* Using Figma variable - Example mapping, adjust as needed */
+  --chart-4: var(--color-primitive-high-contrast-success-50); /* Using Figma variable - Example mapping, adjust as needed */
+  --chart-5: var(--color-primitive-high-contrast-information-50); /* Using Figma variable - Example mapping, adjust as needed */
+  --sidebar: var(--color-primitive-high-contrast-gray-95); /* Using Figma variable */
+  --sidebar-foreground: var(--color-primitive-high-contrast-gray-0); /* Using Figma variable */
+  --sidebar-primary: var(--color-primitive-high-contrast-primary-50); /* Using Figma variable */
+  --sidebar-primary-foreground: var(--color-primitive-high-contrast-gray-0); /* Using Figma variable */
+  --sidebar-accent: var(--color-primitive-high-contrast-gray-90); /* Using Figma variable */
+  --sidebar-accent-foreground: var(--color-primitive-high-contrast-gray-0); /* Using Figma variable */
+  --sidebar-border: var(--color-primitive-high-contrast-gray-80); /* Using Figma variable */
+  --sidebar-ring: var(--color-primitive-high-contrast-primary-50); /* Using Figma variable */
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
   }
-}
-
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  body {
+    @apply bg-background text-foreground;
+  }
 }
